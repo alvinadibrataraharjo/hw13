@@ -22,7 +22,7 @@ function authenticateTokenMiddleware(req, res, next) {
 
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: '*',
   allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept, Authorization",
   methods: "GET, POST, PUT, DELETE, PATCH, OPTIONS",
   optionsSuccessStatus: 200
@@ -50,6 +50,8 @@ const upload = multer({
 app.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
+
+  console.log(name,'iserrr')
   try {
     const { password: passwordDB, ...user } = await prisma.user.create({
       data: {
@@ -68,6 +70,7 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password)
     const user = await prisma.user.findUnique({ where: { email } });
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" });

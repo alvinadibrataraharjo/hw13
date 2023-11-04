@@ -24,12 +24,14 @@ const Register = () => {
     if (password !== confirmPassword) {
       return;
     }
+    console.log(e.target.name.value)
     try {
-      await registerUser(
+      const response = await registerUser(
         e.target.name.value,
         e.target.email.value,
         password
       );
+      console.log("Response Data:", response);
       toast({
         title: "Registered",
         description: "You have successfully registered.",

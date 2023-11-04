@@ -48,7 +48,7 @@ const Navbar = () => {
       <Link to="/">
         <Flex align="center" mr={5} cursor="pointer">
           <Text fontSize="xl" fontWeight="bold">
-            My Website
+            E-Book
           </Text>
         </Flex>
       </Link>

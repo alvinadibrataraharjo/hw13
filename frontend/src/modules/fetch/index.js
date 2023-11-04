@@ -4,6 +4,7 @@ import { instance } from '../axios/index';
 async function registerUser(name, email, password) {
   try {
     const response = await instance.post('/register', { name, email, password });
+    console.log(response.data, 'response data');
     return response.data;
   } catch (error) {
     throw new Error(error.response.data.message || 'Something went wrong');
