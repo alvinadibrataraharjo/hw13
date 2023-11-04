@@ -4,15 +4,20 @@ import {
   FormLabel,
   Image,
   Input,
+  Stack,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { createBook, editBook } from "../modules/fetch";
+import { Link, useParams } from "react-router-dom";
+import { EmailIcon,ArrowForwardIcon, ArrowBackIcon } from '@chakra-ui/icons';
 
 export default function BookForm({ bookData }) {
   const toast = useToast();
   const [selectedImage, setSelectedImage] = useState(null);
+
+  const { id } = useParams();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -132,8 +137,14 @@ export default function BookForm({ bookData }) {
             />
           </FormControl>
         )}
-
+       <Stack direction='row' spacing={10}>
+       <Link to={`/books/${id}`}>
+        <Button leftIcon={<ArrowBackIcon />} colorScheme='teal' variant='solid'>
+            Back
+        </Button>
+        </Link>
         <Button type="submit">{bookData ? "Edit Book" : "Create Book"}</Button>
+        </Stack>
       </VStack>
     </form>
   );
